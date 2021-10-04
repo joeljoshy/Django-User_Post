@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 text-center mt-5">
+                <h2>Posts...</h2>
+                <a href="{%url 'add_post' %}"><button class="btn btn-success btn-lg">Add Post</button></a>
+                <br>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+
+            <br>
+        {% for post in page.object_list %}
+
+
+        <div class="card">
+          <div class="card-header">
+              <small>By : {{post.author.first_name}} on {{post.date}}</small>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text">{{post.body}}</p>
+            <a href="{%url 'post_detail' post.pk%}" class="btn btn-primary">View Post Details</a>
+          </div>
+        </div>
+            <br>
+
+        {% endfor %}
+        </div>
+        <div class="col-4"></div>
+    </div>
+
+
+
+    <div class="text-center">
+        <div class="page-links">
+        {% if page.has_previous %}
+        <a href="{% url 'listall' %}?page={{ page.previous_page_number }}">Previous Page</a>
+        {% endif %}
+        {% if page.has_next %}
+        <a href="{% url 'listall' %}?page={{ page.next_page_number }}">Next Page</a>
+        {% endif %}
+         </div>
+        <br><br>
+    </div>
+
+</div>
+{% endblock content %}
