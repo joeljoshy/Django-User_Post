@@ -38,7 +38,7 @@ def addPost(request):
 
 def listpost(request):
 
-    posts = Post.objects.all().order_by('id')
+    posts = Post.objects.all().order_by('-date')
 
     post_paginator = Paginator(posts,5)
     page_num = request.GET.get('page')
